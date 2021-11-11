@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block cinfo %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="/home/usuarioLbuscarv">Buscar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/home/usuarioLcalificar">Calificar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/home/usuarioLreservarv">Reserva de vuelo</a>
+    </li>
+  </ul>
+  <br>
+  <h3>Calificar Vuelo</h3>
+  <div>
+    <form action="" method="post">
+      {{ form.hidden_tag() }}  
+      {% for message in get_flashed_messages() %}
+            {% if '*' in message %}
+                <div style="color: red;">{{ message }}</div>
+            {% else %}
+                <div style="color:green;">{{ message }}</div>
+            {% endif %}
+          {% endfor %}
+
+        {% if habilitar == 2 %}
+          <p>{{ form.calificacion.label}}{{ form.calificacion(size=1)}}</p>
+        {% endif %}
+<div>
+    <h4>Vuelos Tomados</h4>
+    <p>Califica el vuelo de 1 a 5 donde 1 es “malo” y 5 “Excelente”</p>
+    <table class="table table-success table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Seleccionar</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Destino</th>
+            <th scope="col">Tickets</th>
+          </tr>
+        </thead>
+        {% for data in vuelo %}
+        {% if data[5] == 0%}
+        <tbody>
+          <tr>
+            <th scope="row">{{ data[1] }}</th>
+            <td>{{ form.eleccion(class_='btn btn-primary' , value= data[0] ) }}</td>
+            <td>{{ data[2] }}</td>
+            <td>{{ data[3] }}</td>
+            <td>{{ data[4] }}</td>
+          </tr>
+        </tbody>
+        {% endif %}
+        {% endfor %}
+      </table>
+</div>
+{% endblock %}

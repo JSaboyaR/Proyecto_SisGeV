@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block cinfo %}
+    <br>
+    <h2>Dashboard Administrativo</h2>
+    <br>
+    <div class="izqLinea">
+        <p><b>Total de ingresos a la plataforma  </b> {{registros[0]}}</p>
+        <p><b>Total de vuelos en registrados  </b> {{registros[1]}}</p>
+        <p><b>Total de usuarios registrados  </b> {{registros[2]}}</p>
+        <p><b>Total de reservas registradas  </b> {{registros[3]}}</p>
+        <p><b>Total de comentarios registrados </b> {{registros[4]}}</p>
+    </div>
+    
+{% endblock %}

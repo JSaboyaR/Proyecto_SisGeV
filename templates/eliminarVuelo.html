@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block cinfo %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="/home/adminLagregarv">Agregar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/home/adminLeditarv">Editar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/home/adminLeliminarV">Eliminar Vuelo</a>
+    </li>
+  </ul>
+  <h3>Eliminar Vuelo</h3>
+  <div>
+  <form action="/home/adminLeliminarV" method="POST">
+        {{ form.hidden_tag() }}
+        <p class = izqLinea>
+            {{ form.codigo.label }} {{ form.codigo(size=30)}} {{ form.enviar(class_='btn btn-primary') }}
+        </p>
+        <p class = izqLinea>Campos con * son obligatorios</p>
+        {% for message in get_flashed_messages() %}
+          {% if '*' in message %}
+              <div style="color: red;">{{ message }}</div>
+          {% else %}
+              <div style="color:green;">{{ message }}</div>
+          {% endif %}
+        {% endfor %}
+        <h4>Información del vuelo</h4>
+        <table class="table table-success table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Avión</th>
+                <th scope="col">Origen</th>
+                <th scope="col">Destino</th>
+                <th scope="col">Piloto</th>
+                <th scope="col">Capacidad</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for dat in vuelo %}
+                  <th scope="row">{{ dat[0] }}</th>
+                  <td>{{ dat[1] }}</td>
+                  <td>{{ dat[2] }}</td>
+                  <td>{{ dat[3] }}</td>
+                  <td>{{ dat[4] }}</td>
+                  <td>{{ dat[5] }}</td>
+                  <td>{{ dat[6] }}</td>
+          {% endfor %}
+              </tr>
+            </tbody>
+          </table>
+          {% if habilitar == 1 %}
+            <p>{{form.eliminar(class_="btn btn-primary")}}</p>
+          {% endif %}
+    </form>
+</div>
+{% endblock %}

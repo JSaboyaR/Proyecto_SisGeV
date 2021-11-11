@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block cinfo %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="/home/adminLagregarv">Agregar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/home/adminLeditarv">Editar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/home/adminLeliminarV">Eliminar Vuelo</a>
+    </li>
+  </ul>
+  <h3>Editar Vuelo</h3>
+  <div>
+  <form action="/home/adminLeditarv" method="post" novalidate>
+    {{ form.hidden_tag() }}
+      <p>
+          {{ form.codigo.label }} {{ form.codigo(size=30)}} {{ form.buscar(class_='btn btn-primary') }}
+      </p>
+    <p>Campos con * son obligatorios</p>
+    {% if habilitar == 1 %}
+      {% for message in get_flashed_messages() %}
+            {% if '*' in message %}
+                <div style="color: red;">{{ message }}</div>
+            {% else %}
+                <div style="color:green;">{{ message }}</div>
+            {% endif %}
+      {% endfor %}
+    {% endif %}
+    <h4>Información del vuelo</h4>
+
+    {% if habilitar == 2 %}
+      <p>
+        {{ form.avion.label }} {{ form.avion(size=30)}}
+        {{ form.origen.label }} {{ form.origen(size=1)}}
+        {{ form.destino.label }} {{ form.destino(size=1)}}
+      </p>
+      <p>
+        {{ form.piloto.label }} {{ form.piloto(size=1)}}
+        {{ form.cupo.label }} {{ form.cupo(size=4)}} 
+        {{ form.estado.label }} {{ form.estado(size=1)}}*
+      </p>
+      {% for message in get_flashed_messages() %}
+            {% if '*' in message %}
+                <div style="color: red;">{{ message }}</div>
+            {% else %}
+                <div style="color:green;">{{ message }}</div>
+            {% endif %}
+          {% endfor %}
+      <p>{{ form.enviar(class_='btn btn-primary') }}</p>
+    {%endif%}  
+</form>
+</div>
+{% endblock %}

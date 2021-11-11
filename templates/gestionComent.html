@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block cinfo %}
+  <h3>Gestión de Comentarios</h3>
+  <p>Busque su comentario anterior para poder editarlo o cree uno nuevo
+  </p>
+  <div>
+  <form action="/home/comentario" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p class="izqLinea">
+        {{ form.buscarCom.label }} {{ form.buscarCom(size=30)}} {{ form.buscar(class_='btn btn-primary') }}
+    </p>
+    <p class="izqLinea">
+        {{ form.motivo.label }} {{ form.motivo(size=1)}} 
+    </p>
+    <p class="izqLinea">
+      {{ form.comentario.label}}
+    </p>
+    <p class="izqLinea">
+      {{ form.comentario(size=250, cols="130", rows="2"  )}}
+    </p>
+    </p> 
+    <div>
+      {% for message in get_flashed_messages() %}
+          {% if '*' in message %}
+              <div style="color: red;">{{ message }}</div>
+          {% else %}
+              <div style="color:green;">{{ message }}</div>
+          {% endif %}
+      {% endfor %}
+  </div>
+  {% if habilitar == 1%}
+    <p>{{ form.enviar(class_='btn btn-primary') }}</p>
+  {% elif habilitar == 2%}
+    <p>{{ form.eliminar(class_='btn btn-primary') }} {{ form.editar(class_='btn btn-primary') }}</p>
+  {% endif %}
+</form>
+</div>
+{% endblock %}

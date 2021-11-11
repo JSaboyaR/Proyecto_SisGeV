@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block cinfo %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="/home/usuarioLbuscarv">Buscar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/home/usuarioLcalificar">Calificar Vuelo</a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link active" href="/home/usuarioLreservarv">Reserva de vuelo</a>
+    </li>
+  </ul>
+  <h3>Reserva de Vuelo</h3>
+  <div>
+    <form action="" method="post">
+      {{ form.hidden_tag() }}
+    <p>{{ form.origen.label }}{{ form.origen(size=1)}}{{ form.destino.label }}{{ form.destino(size=1)}}{{ form.buscar(class_='btn btn-primary') }}</p>
+    <h4>Vuelos disponibles</h4>
+    
+    {% for message in get_flashed_messages() %}
+            {% if '*' in message %}
+                <div style="color: red;">{{ message }}</div>
+            {% else %}
+                <div style="color:green;">{{ message }}</div>
+            {% endif %}
+          {% endfor %}
+        {% if habilitar == 2 %}
+          <p>{{ form.pasaje.label}}{{ form.pasaje(size=1)}}</p>
+        {% endif %}
+                <table class="table table-success table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Código</th>
+                      <th scope="col">Seleccionar</th>
+                      <th scope="col">Avión</th>
+                      <th scope="col">Origen</th>
+                      <th scope="col">Destino</th>
+                      <th scope="col">Piloto</th>
+                      <th scope="col">Estado</th>
+                    </tr>
+                  </thead>
+                  {% for data in vuelo %}
+                  {% if (destino == data[3]) and (data[6] != 'aterrizado') %}
+                  <tbody>
+                    <tr>
+                    <div>
+                          <th scope="row">{{ data[0] }}</th>
+                          <td>{{ form.eleccion(class_='btn btn-primary' , value= data[0] ) }}</td>
+                          <td>{{ data[1] }}</td>
+                          <td>{{ data[2] }}</td>
+                          <td>{{ data[3] }}</td>
+                          <td>{{ data[4] }}</td>
+                          <td>{{ data[6] }}</td>
+                      </div>
+                    </tr>
+                  </tbody>
+                  {%endif%}
+                  {% endfor %}
+                  </table>
+                        </form>
+{% endblock %}

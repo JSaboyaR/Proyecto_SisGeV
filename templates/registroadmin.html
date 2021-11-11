@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block cinfo %}
+        <h3>Registro Especial</h3><br>
+        <form action="/registroAdmin" method="POST">
+            {{ form.hidden_tag() }}
+        <table class="tablar">
+            <tr>
+                <td>{{ form.nombre.label }}</td> <td>{{ form.nombre(size=30, minlength=5, maxlength=30)}} </td> 
+                <td>{{ form.cedula.label }} </td> <td>{{ form.cedula(size=30, minlength=5, maxlength=30)}} </td>
+                <td></td>
+            </tr>
+            <tr><td> </td></tr>
+            <tr>
+                <td>{{ form.correo.label }}</td> <td>{{ form.correo(size=30, minlength=5, maxlength=30)}} </td> 
+                <td>{{ form.telefono.label }} </td> <td> {{ form.telefono(size=30, minlength=5, maxlength=30)}} </td>  
+                <td></td>
+            </tr>
+            <tr><td> </td></tr>
+            <tr>
+                <td>{{ form.usuario.label }} </td> <td> {{ form.usuario(size=30, minlength=5, maxlength=30) }} </td>
+                <td>{{ form.contrasena.label }} </td> <td> {{ form.contrasena(size=30, minlength=5, maxlength=30) }} </td>
+                <td><img src="{{ url_for('static', filename='img/view.png')}}" name="Ojo" class="verClave" onmouseover="mostrarPassword()" onmouseout="ocultarPassword()"> </td>
+            </tr>
+            <tr><td></td></tr>
+            <tr>
+                <td>{{ form.tipo.label }} </td> <td> {{ form.tipo(size=1) }} </td>
+                <td</td><td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3"><br><p style="text-align-last:left">Campos con * son obligatorios</p></td>
+            </tr>
+            <tr><td> </td></tr>    
+            <tr>
+                <td colspan="3"><br>{{ form.aceptar() }} {{ form.aceptar.label }}</td>
+            </tr>
+        </table>
+        <br>
+        <div>
+            {% for message in get_flashed_messages() %}
+                {% if '*' in message %}
+                    <div style="color: red;">{{ message }}</div>
+                {% else %}
+                    <div style="color:green;">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+            <br><p>{{ form.enviar(class_='btn btn-primary') }}</p>
+            </form>
+{% endblock %}

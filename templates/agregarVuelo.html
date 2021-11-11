@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block cinfo %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/home/adminLagregarv">Agregar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/home/adminLeditarv">Editar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/home/adminLeliminarV">Eliminar Vuelo</a>
+    </li>
+  </ul>
+  <h3>Agregar Vuelo</h3>
+  <div>
+  <form action="/home/adminLagregarv" method="POST">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.codigo.label }} {{ form.codigo(size=30)}}* 
+        {{ form.avion.label }} {{ form.avion(size=30)}}* 
+    </p>
+    <p>
+      {{ form.origen.label }} {{ form.origen(size=1)}}* 
+      {{ form.destino.label }} {{ form.destino(size=1)}}* 
+    </p>
+    <p>
+      {{ form.piloto.label }} {{ form.piloto(size=1)}}*
+      {{ form.cupo.label }} {{ form.cupo(size=1)}}*
+    </p>
+    <p>
+      {{ form.estado.label }} {{ form.estado(size=1)}}* 
+    </p>
+    <p>Campos con * son obligatorios</p>
+    <div>
+      {% for message in get_flashed_messages() %}
+          {% if '*' in message %}
+              <div style="color: red;">{{ message }}</div>
+          {% else %}
+              <div style="color:green;">{{ message }}</div>
+          {% endif %}
+      {% endfor %}
+    </div>
+    <br>
+    <p>{{ form.enviar(class_='btn btn-primary') }}</p>
+
+</form>
+</div>
+{% endblock %}

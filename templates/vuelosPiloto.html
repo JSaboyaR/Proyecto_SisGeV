@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block cinfo %}
+
+  <br>
+  <h3>Vuelos asignados</h3>
+  <br>
+  <div>
+      {% for message in get_flashed_messages() %}
+          {% if '*' in message %}
+              <div style="color: red;">{{ message }}</div>
+          {% else %}
+              <div style="color:green;">{{ message }}</div>
+          {% endif %}
+      {% endfor %}
+  
+    </div>
+
+<div>
+    <h4>Información del vuelo</h4>
+    <table class="table table-success table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Avión</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Destino</th>
+            <th scope="col">Piloto</th>
+            <th scope="col">Capacidad</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        {% for data in vuelo %}
+        <tbody>
+          <tr>
+          <div>
+                <th scope="row">{{ data[0] }}</th>
+                <td>{{ data[1] }}</td>
+                <td>{{ data[2] }}</td>
+                <td>{{ data[3] }}</td>
+                <td>{{ data[4] }}</td>
+                <td>{{ data[5] }}</td>
+                <td>{{ data[6] }}</td>
+            </div>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+</div>
+{% endblock %}

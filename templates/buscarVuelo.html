@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block cinfo %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/home/usuarioLbuscarv">Buscar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/home/usuarioLcalificar">Calificar Vuelo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/home/usuarioLreservarv">Reserva de vuelo</a>
+    </li>
+  </ul>
+  <br>
+  <h3>Buscar Vuelo</h3>
+  <br>
+  
+  <div>
+    <form action="/home/usuarioLbuscarv" method="post">
+        {{ form.hidden_tag() }}
+        
+        <p class="izqLinea">    
+            {{ form.codigoB.label }}{{ form.codigoB(size=30)}}
+
+            {{ form.enviar(class_='btn btn-primary') }}
+        </p>
+    </form>
+    <p class="izqLinea">Campos con * son obligatorios</p>
+    <div>
+      {% for message in get_flashed_messages() %}
+          {% if '*' in message %}
+              <div style="color: red;">{{ message }}</div>
+          {% else %}
+              <div style="color:green;">{{ message }}</div>
+          {% endif %}
+      {% endfor %}
+  </div>
+</div>
+<div>
+    <h4>Información del vuelo</h4>
+    <table class="table table-success table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Avión</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Destino</th>
+            <th scope="col">Piloto</th>
+            <th scope="col">Capacidad</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+          {% for dat in vuelo %}
+            <th scope="row">{{ dat[0] }}</th>
+            <td>{{ dat[1] }}</td>
+            <td>{{ dat[2] }}</td>
+            <td>{{ dat[3] }}</td>
+            <td>{{ dat[4] }}</td>
+            <td>{{ dat[5] }}</td>
+            <td>{{ dat[6] }}</td>
+          {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+</div>
+{% endblock %}
